@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :is_validate_signature
 
-  CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
+  CHANNEL_SECRET = ENV['CHANNEL_SECRET']
 
   # verify access from LINE
   private
