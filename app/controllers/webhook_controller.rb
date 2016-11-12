@@ -25,7 +25,7 @@ class WebhookController < ApplicationController
   private
   def reply(params)
     response_service = response_service(params)
-    reply_token, response_text = response_service.form_response
+    response_text, reply_token  = response_service.form_response
 
     line_client.reply(reply_token, response_text)  if response_text.present?
   end
