@@ -1,9 +1,13 @@
 class LineClient
   END_POINT = "https://api.line.me"
+  OUTBOUND_PROXY = ENV['OUTBOUND_PROXY']
+  CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
 
-  def initialize(channel_access_token, proxy = nil)
-    @channel_access_token = channel_access_token
-    @proxy = proxy
+
+
+  def initialize
+    @channel_access_token = CHANNEL_ACCESS_TOKEN
+    @proxy = OUTBOUND_PROXY
   end
 
   def post(path, data)
