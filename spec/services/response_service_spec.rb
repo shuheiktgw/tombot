@@ -26,7 +26,7 @@ class ResponseServiceSpec
         expect(actual[0]).to eq(expect)
       end
 
-      it 'should call cleaning_date#scheduled_cleaning_date if valid date is given' do
+      it 'should call cleaning_date#scheduled_cleaning_date= if valid date is given' do
         @params["events"][0]["message"]["text"] = 'tmb_set-cleaning-date_2016/11/11'
         expect(@cleaning_date_mock).to receive(:scheduled_cleaning_date=)
 
@@ -42,6 +42,14 @@ class ResponseServiceSpec
         expect = '日付の形式が正しくありません'
         actual = response_service.form_response
         expect(actual[0]).to eq(expect)
+      end
+
+      it 'should return call cleaning_date#scheduled_cleaning_date to get-cleaning-date' do
+        @params["events"][0]["message"]["text"] = 'tmb_get-cleaning-date'
+        expect(@cleaning_date_mock).to receive(:scheduled_cleaning_date)
+        response_service = ResponseService.new(@params, @cleaning_date_mock)
+
+        response_service.form_response
       end
 
       it 'should return commands to help command' do

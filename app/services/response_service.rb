@@ -1,7 +1,7 @@
 class ResponseService
   PREFIX_KEY = 'tmb'
   EVENT_TYPE_MESSAGE = 'message'
-  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', HELP: 'help'}
+  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', HELP: 'help'}
 
   def initialize(params, cleaning_date = CleaningDateService.instance)
     event = params["events"][0]
@@ -20,6 +20,8 @@ class ResponseService
         ['pong', @reply_token]
       when COMMANDS[:SET_CLEANING_DATE]
         [set_cleaning_date, @reply_token]
+      when COMMANDS[:GET_CLEANING_DATE]
+        [get_cleaning_date, @reply_token]
       when COMMANDS[:HELP]
         [help, @reply_token]
       else
@@ -36,6 +38,11 @@ class ResponseService
     rescue ArgumentError => e
       '日付の形式が正しくありません'
     end
+  end
+
+  private
+  def get_cleaning_date
+    @cleaning_date.scheduled_cleaning_date
   end
 
   private
