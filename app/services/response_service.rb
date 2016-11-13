@@ -42,7 +42,8 @@ class ResponseService
 
   private
   def get_cleaning_date
-    @cleaning_date.scheduled_cleaning_date
+    date = @cleaning_date.scheduled_cleaning_date
+    "現在掃除は#{date}に設定されています"
   end
 
   private
