@@ -2,8 +2,7 @@ class LineClient
   END_POINT = "https://api.line.me"
   OUTBOUND_PROXY = ENV['OUTBOUND_PROXY']
   CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
-
-
+  PUSH_TO_ID = ENV['PUSH_TO_ID']
 
   def initialize
     @channel_access_token = CHANNEL_ACCESS_TOKEN
@@ -44,7 +43,7 @@ class LineClient
     messages = form_text_messages(text)
 
     body = {
-        "to" => "Ua03a73001d39ec15b475b410a9df5f42", # TODO: toをtomboのグループに変更する
+        "to" => PUSH_TO_ID, # TODO: toをtomboのグループに変更する
         "messages" => messages
     }
 
