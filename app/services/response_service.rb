@@ -41,6 +41,6 @@ class ResponseService
   private
   def help
     arr = COMMANDS.values.unshift('選択可能なコマンドは以下のとおりです')
-    arr.join('\n')
+    arr.join("\n")
   end
 end
