@@ -1,5 +1,4 @@
 require 'date'
-require '../../lib/name_list'
 
 class ReminderService
   def initialize(today = Date::today)
@@ -25,19 +24,8 @@ class ReminderService
   end
 
   def check_garbage_reminder
-    MEMBER_LIST
-
-    # 0 = 日曜日, 6 = 土曜日
-    day_of_week = @today.wday
-
-    case day_of_week
-      when 2, 5
-        '今日は燃えるゴミの日ですよ~ 捨てられるものは捨ててしまいましょう!'
-      when 6
-        '今日は資源ごみの日ですよ~, カン･ビン･ペットボトル･ダンボールを捨てましょう!'
-      else
-        ''
-    end
+    garbage = GarbageService.instance
+    garbage.reminder(@today)
   end
 
   def check_payment_reminder
