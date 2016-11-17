@@ -1,9 +1,12 @@
 class LineClient
   END_POINT = "https://api.line.me"
+  OUTBOUND_PROXY = ENV['OUTBOUND_PROXY']
+  CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
+  PUSH_TO_ID = ENV['PUSH_TO_ID']
 
-  def initialize(channel_access_token, proxy = nil)
-    @channel_access_token = channel_access_token
-    @proxy = proxy
+  def initialize
+    @channel_access_token = CHANNEL_ACCESS_TOKEN
+    @proxy = OUTBOUND_PROXY
   end
 
   def post(path, data)
@@ -25,20 +28,45 @@ class LineClient
     res
   end
 
-  def reply(replyToken, text)
-
-    messages = [
-        {
-            "type" => "text" ,
-            "text" => text
-        }
-    ]
+  def reply(reply_token, text)
+    messages = form_text_messages(text)
 
     body = {
-        "replyToken" => replyToken ,
+        "replyToken" => reply_token,
         "messages" => messages
     }
-    post('/v2/bot/message/reply', body.to_json)
+
+    res = post('/v2/bot/message/reply', body.to_json)
+  end
+
+  def push(text)
+    messages = form_text_messages(text)
+
+    body = {
+        "to" => PUSH_TO_ID, # TODO: toをtomboのグループに変更する
+        "messages" => messages
+    }
+
+    post('/v2/bot/message/push', body.to_json)
+  end
+
+  private
+  def form_text_messages(*texts)
+    messages = []
+
+    texts.each do |text|
+      messages << text_message(text)
+    end
+
+    messages
+  end
+
+  private
+  def text_message(text)
+    {
+        "type" => "text",
+        "text" => text
+    }
   end
 
 end
