@@ -4,8 +4,6 @@ require 'singleton'
 class GarbageService
   include Singleton
 
-  attr_accessor :person_in_charge
-
   def initialize
     @person_in_charge = '北川'
   end
@@ -16,15 +14,24 @@ class GarbageService
 
     case day_of_week
       when 0
-        person_in_charge = select_random
-        "明日からのゴミ出し大臣は#{person_in_charge}さんです! よろしくお願いします!"
+        set_person_in_charge(select_random)
+        "明日からのゴミ出し大臣は#{get_person_in_charge}さんです! よろしくお願いします!"
       when 2, 5
-        "今日は燃えるゴミの日です. ゴミ出し大臣の#{person_in_charge}さんは燃えるゴミをお願いします!"
+        "今日は燃えるゴミの日です. ゴミ出し大臣の#{get_person_in_charge}さんは燃えるゴミをお願いします!"
       when 6
-        "今日は資源ごみの日です, ゴミ出し大臣の#{person_in_charge}さんはカン･ビン･ペットボトル･ダンボールのゴミ出しをお願いします!"
+        "今日は資源ごみの日です, ゴミ出し大臣の#{get_person_in_charge}さんはカン･ビン･ペットボトル･ダンボールのゴミ出しをお願いします!"
       else
         ''
     end
+  end
+
+  def get_person_in_charge
+    @person_in_charge
+  end
+
+  private
+  def set_person_in_charge(name)
+    @person_in_charge = name
   end
 
   private

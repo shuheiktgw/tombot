@@ -1,15 +1,16 @@
 class ResponseService
   PREFIX_KEY = 'tmb'
   EVENT_TYPE_MESSAGE = 'message'
-  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', HELP: 'help'}
+  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
 
-  def initialize(params, cleaning_date = CleaningDateService.instance)
+  def initialize(params, cleaning_date = CleaningDateService.instance, garbage = GarbageService.instance)
     event = params["events"][0]
     event_type = event["type"]
     input_text = (event["message"]["text"] if event_type == EVENT_TYPE_MESSAGE) || ''
     @reply_token = event["replyToken"]
     @prefix, @command, @data = input_text.split('_')
     @cleaning_date = cleaning_date
+    @garbage = garbage
   end
 
   def form_response
@@ -22,6 +23,10 @@ class ResponseService
         [set_cleaning_date, @reply_token]
       when COMMANDS[:GET_CLEANING_DATE]
         [get_cleaning_date, @reply_token]
+      when COMMANDS[:GET_DAIJIN]
+        [get_daijin, @reply_token]
+      when COMMANDS[:HAT]
+        [hat, @reply_token]
       when COMMANDS[:HELP]
         [help, @reply_token]
       else
@@ -44,6 +49,18 @@ class ResponseService
   def get_cleaning_date
     date = @cleaning_date.scheduled_cleaning_date
     "現在掃除は#{date}に設定されています"
+  end
+
+  private
+  def get_daijin
+    person_in_charge = @garbage.get_person_in_charge
+    "今週のゴミ出し大臣は#{person_in_charge}さんです."
+  end
+
+  private
+  def hat
+    person = ['岡川', '谷沢', '楠本', '北川'].sample
+    "#{person}さん,Youいっちゃいなよ!"
   end
 
   private
