@@ -5,7 +5,7 @@ class GarbageService
   include Singleton
 
   def initialize
-    @person_in_charge = '北川'
+    @person_in_charge = select_random
   end
 
   def reminder(today)

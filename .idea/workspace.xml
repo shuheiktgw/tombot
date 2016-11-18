@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c8f9378-d0de-40b1-b40f-8d9a2d16690b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/garbage_service.rb" afterPath="$PROJECT_DIR$/app/services/garbage_service.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/services/response_service.rb" afterPath="$PROJECT_DIR$/app/services/response_service.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/services/response_service_spec.rb" afterPath="$PROJECT_DIR$/spec/services/response_service_spec.rb" />
     </list>
     <ignored path="tombot2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,10 +51,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="response_service_spec.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="response_service_spec.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/services/response_service_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="135">
               <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
               <folding />
             </state>
@@ -74,11 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="garbage_service.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="garbage_service.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/services/garbage_service.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="105">
+              <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -158,9 +155,9 @@
         <option value="$PROJECT_DIR$/app/uils/member_list.rb" />
         <option value="$PROJECT_DIR$/spec/services/reminder_service_spec.rb" />
         <option value="$PROJECT_DIR$/spec/services/garbage_service_spec.rb" />
-        <option value="$PROJECT_DIR$/app/services/garbage_service.rb" />
         <option value="$PROJECT_DIR$/app/services/response_service.rb" />
         <option value="$PROJECT_DIR$/spec/services/response_service_spec.rb" />
+        <option value="$PROJECT_DIR$/app/services/garbage_service.rb" />
       </list>
     </option>
   </component>
@@ -516,12 +513,12 @@
       <workItem from="1479165850154" duration="304000" />
       <workItem from="1479259903345" duration="592000" />
       <workItem from="1479344521622" duration="2803000" />
-      <workItem from="1479430887062" duration="2843000" />
+      <workItem from="1479430887062" duration="2975000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27928000" />
+    <option name="totallyTimeSpent" value="28060000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -917,10 +914,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/services/garbage_service.rb">
+    <entry file="file://$PROJECT_DIR$/spec/services/response_service_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -941,10 +938,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/services/response_service_spec.rb">
+    <entry file="file://$PROJECT_DIR$/app/services/garbage_service.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
+        <state relative-caret-position="105">
+          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
           <folding />
         </state>
       </provider>
