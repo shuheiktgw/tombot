@@ -3,8 +3,6 @@ require_relative '../models/garbage'
 require_relative '../../config/initializers/constants'
 
 class GarbageService
-  MEMBER_LIST = ['岡川', '楠本', '谷沢', '北川']
-
   def initialize(garbage_model = Garbage)
     @garbage_model = garbage_model
   end
@@ -15,7 +13,7 @@ class GarbageService
 
     case day_of_week
       when 0
-        set_person_in_charge(select_random)
+        set_person_in_charge
         "明日からのゴミ出し大臣は#{get_person_in_charge}さんです! よろしくお願いします!"
       when 2, 5
         "今日は燃えるゴミの日です. ゴミ出し大臣の#{get_person_in_charge}さんは燃えるゴミをお願いします!"
@@ -31,12 +29,15 @@ class GarbageService
   end
 
   private
-  def set_person_in_charge(name)
-    @garbage_model.create(name: name)
-  end
+  def set_person_in_charge
+    list = Constants::MEMBER_LIST
+    previous = get_person_in_charge
 
-  private
-  def select_random
-    Constants::MEMBER_LIST.sample
+    if previous == list.last
+      @garbage_model.create(name: list.first)
+    else
+      next_index = list.index(previous) + 1
+      @garbage_model.create(name: list[next_index])
+    end
   end
 end
