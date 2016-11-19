@@ -24,7 +24,7 @@ class ReminderService
   end
 
   def check_garbage_reminder
-    garbage = GarbageService.instance
+    garbage = GarbageService.new
     garbage.reminder(@today)
   end
 

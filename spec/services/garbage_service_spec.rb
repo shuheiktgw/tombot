@@ -3,7 +3,7 @@ require_relative '../../app/services/garbage_service'
 class GarbageServiceSpec
   describe('GarbageServiceSpec') do
     before do
-      @garbage_instance = GarbageService.instance
+      @garbage_instance = GarbageService.new
     end
 
     it('should return Moerugomi reminder if today is Tuesday') do

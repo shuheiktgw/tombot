@@ -1,9 +1,10 @@
 class ResponseService
   PREFIX_KEY = 'tmb'
   EVENT_TYPE_MESSAGE = 'message'
+  MEMBER_LIST = ['岡川', '楠本', '谷沢', '北川']
   COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
 
-  def initialize(params, cleaning_date = CleaningDateService.instance, garbage = GarbageService.instance)
+  def initialize(params, cleaning_date = CleaningDateService.instance, garbage = GarbageService.new)
     event = params["events"][0]
     event_type = event["type"]
     input_text = (event["message"]["text"] if event_type == EVENT_TYPE_MESSAGE) || ''
@@ -59,8 +60,8 @@ class ResponseService
 
   private
   def hat
-    person = ['岡川', '谷沢', '楠本', '北川'].sample
-    "#{person}さん,Youいっちゃいなよ!"
+    person = MEMBER_LIST.sample
+    "#{person}さん,Youいっちゃいなyo!"
   end
 
   private

@@ -56,7 +56,7 @@ class ResponseServiceSpec
       it 'should call garbage#get_person_in_charge to get-daijin' do
         @params["events"][0]["message"]["text"] = 'tmb_get-daijin'
         expect(@garbage_mock).to receive(:get_person_in_charge)
-        response_service = ResponseService.new(params = @params, garbage = @garbage_mock)
+        response_service = ResponseService.new(params = @params, cleaning_date = @cleaning_date_mock, garbage = @garbage_mock)
 
         response_service.form_response
       end
@@ -65,7 +65,7 @@ class ResponseServiceSpec
         @params["events"][0]["message"]["text"] = 'tmb_hat'
         response_service = ResponseService.new(params = @params)
 
-        expect = "Youいっちゃいなよ!"
+        expect = "Youいっちゃいなyo!"
         actual = response_service.form_response
 
         expect(actual[0]).to end_with(expect)
