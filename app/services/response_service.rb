@@ -60,7 +60,7 @@ class ResponseService
   private
   def hat
     person = ['岡川', '谷沢', '楠本', '北川'].sample
-    "#{person}さん,Youいっちゃいなよ!"
+    "#{person}さん,Youいっちゃいなyo!"
   end
 
   private
