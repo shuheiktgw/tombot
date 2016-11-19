@@ -4,7 +4,7 @@ class ResponseService
   MEMBER_LIST = ['岡川', '楠本', '谷沢', '北川']
   COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
 
-  def initialize(params, cleaning_date = CleaningDateService.instance, garbage = GarbageService.new)
+  def initialize(params, cleaning_date = CleaningDateService.new, garbage = GarbageService.new)
     event = params["events"][0]
     event_type = event["type"]
     input_text = (event["message"]["text"] if event_type == EVENT_TYPE_MESSAGE) || ''

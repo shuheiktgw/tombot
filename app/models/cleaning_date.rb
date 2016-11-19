@@ -1,4 +1,4 @@
 require_relative '../models/application_record'
 
-class Garbage < ApplicationRecord
+class CleaningDate < ApplicationRecord
 end

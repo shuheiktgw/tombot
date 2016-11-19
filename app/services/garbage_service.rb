@@ -1,9 +1,12 @@
 require 'date'
 require_relative '../models/garbage'
-require_relative '../models/application_record'
 
 class GarbageService
   MEMBER_LIST = ['岡川', '楠本', '谷沢', '北川']
+
+  def initialize(garbage_model = Garbage)
+    @garbage_model = garbage_model
+  end
 
   def reminder(today)
     # 0 = 日曜日, 6 = 土曜日
@@ -23,12 +26,12 @@ class GarbageService
   end
 
   def get_person_in_charge
-    Garbage.last
+    @garbage_model.last.name
   end
 
   private
   def set_person_in_charge(name)
-    Garbage.new.set_person_in_charge(name)
+    @garbage_model.create(name: name)
   end
 
   private

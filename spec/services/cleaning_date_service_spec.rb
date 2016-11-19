@@ -1,9 +1,12 @@
 require_relative '../../app/services/cleaning_date_service'
+require_relative '../../app/models/cleaning_date'
+require 'rails_helper'
 
 class CleaningDateServiceSpec
   describe('CleaningService') do
     before do
-      @cleaning_data_instance = CleaningDateService.instance
+      @cleaning_data_instance = CleaningDateService.new
+      CleaningDate.create(cleaning_date: Date::new(2016, 11, 5))
     end
 
     describe('#reminder') do

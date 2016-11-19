@@ -1,9 +1,12 @@
 require_relative '../../app/services/garbage_service'
+require_relative '../../app/models/garbage'
+require 'rails_helper'
 
 class GarbageServiceSpec
   describe('GarbageServiceSpec') do
     before do
       @garbage_instance = GarbageService.new
+      Garbage.create(name: '北川')
     end
 
     it('should return Moerugomi reminder if today is Tuesday') do
