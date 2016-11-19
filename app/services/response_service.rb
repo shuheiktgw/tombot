@@ -1,7 +1,8 @@
+require_relative '../../config/initializers/constants'
+
 class ResponseService
   PREFIX_KEY = 'tmb'
   EVENT_TYPE_MESSAGE = 'message'
-  MEMBER_LIST = ['岡川', '楠本', '谷沢', '北川']
   COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
 
   def initialize(params, cleaning_date = CleaningDateService.new, garbage = GarbageService.new)
@@ -60,7 +61,7 @@ class ResponseService
 
   private
   def hat
-    person = MEMBER_LIST.sample
+    person = Constants::MEMBER_LIST.sample
     "#{person}さん,Youいっちゃいなyo!"
   end
 

@@ -1,5 +1,6 @@
 require 'date'
 require_relative '../models/garbage'
+require_relative '../../config/initializers/constants'
 
 class GarbageService
   MEMBER_LIST = ['岡川', '楠本', '谷沢', '北川']
@@ -36,6 +37,6 @@ class GarbageService
 
   private
   def select_random
-    MEMBER_LIST.sample
+    Constants::MEMBER_LIST.sample
   end
 end
