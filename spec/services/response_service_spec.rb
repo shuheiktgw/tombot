@@ -53,6 +53,14 @@ class ResponseServiceSpec
         response_service.form_response
       end
 
+      it 'should call garbage#set_person_in_charge_manually with name to set-daijin' do
+        @params["events"][0]["message"]["text"] = 'tmb_set-daijin_北川'
+        expect(@garbage_mock).to receive(:set_person_in_charge_manually).with('北川')
+        response_service = ResponseService.new(params = @params, cleaning_date = @cleaning_date_mock, garbage = @garbage_mock)
+
+        response_service.form_response
+      end
+
       it 'should call garbage#get_person_in_charge to get-daijin' do
         @params["events"][0]["message"]["text"] = 'tmb_get-daijin'
         expect(@garbage_mock).to receive(:get_person_in_charge)

@@ -3,7 +3,7 @@ require_relative '../../config/initializers/constants'
 class ResponseService
   PREFIX_KEY = 'tmb'
   EVENT_TYPE_MESSAGE = 'message'
-  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
+  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', SET_DAIJIN: 'set-daijin',GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
 
   def initialize(params, cleaning_date = CleaningDateService.new, garbage = GarbageService.new)
     event = params["events"][0]
@@ -25,6 +25,8 @@ class ResponseService
         [set_cleaning_date, @reply_token]
       when COMMANDS[:GET_CLEANING_DATE]
         [get_cleaning_date, @reply_token]
+      when COMMANDS[:SET_DAIJIN]
+        [set_daijin, @reply_token]
       when COMMANDS[:GET_DAIJIN]
         [get_daijin, @reply_token]
       when COMMANDS[:HAT]
@@ -32,7 +34,7 @@ class ResponseService
       when COMMANDS[:HELP]
         [help, @reply_token]
       else
-        ''
+        ['コマンドが認識できませんでした. tmb_helpでコマンドの一覧を確認することができます.', @reply_token]
     end
   end
 
@@ -51,6 +53,11 @@ class ResponseService
   def get_cleaning_date
     date = @cleaning_date.scheduled_cleaning_date
     "現在掃除は#{date}に設定されています"
+  end
+
+  private
+  def set_daijin
+    @garbage.set_person_in_charge_manually(@data)
   end
 
   private

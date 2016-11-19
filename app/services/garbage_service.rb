@@ -28,6 +28,15 @@ class GarbageService
     @garbage_model.last.name
   end
 
+  def set_person_in_charge_manually(name)
+    if Constants::MEMBER_LIST.include?(name)
+      @garbage_model.create(name: name)
+      "今週のゴミ出し大臣を#{name}さんに設定しました"
+    else
+      "名前が不正です. セットすることができる名前はこちら#{Constants::MEMBER_LIST.join(', ')}"
+    end
+  end
+
   private
   def set_person_in_charge
     list = Constants::MEMBER_LIST
