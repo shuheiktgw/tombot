@@ -1,3 +1,5 @@
+require_relative '../../config/initializers/constants'
+
 class ResponseService
   PREFIX_KEY = 'tmb'
   EVENT_TYPE_MESSAGE = 'message'
@@ -59,7 +61,7 @@ class ResponseService
 
   private
   def hat
-    person = ['岡川', '谷沢', '楠本', '北川'].sample
+    person = Constants::MEMBER_LIST.sample
     "#{person}さん,Youいっちゃいなyo!"
   end
 

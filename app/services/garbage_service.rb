@@ -1,5 +1,6 @@
 require 'date'
 require 'singleton'
+require_relative '../../config/initializers/constants'
 
 class GarbageService
   include Singleton
@@ -36,6 +37,6 @@ class GarbageService
 
   private
   def select_random
-    ['岡川', '谷沢', '楠本', '北川'].sample
+    Constants::MEMBER_LIST.sample
   end
 end
