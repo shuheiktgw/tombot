@@ -39,7 +39,7 @@ class ReminderService
   end
 
   def check_cleaning_date_reminder
-    cleaning_date = CleaningDateService.instance
+    cleaning_date = CleaningDateService.new
     cleaning_date.reminder(@today)
   end
 end
