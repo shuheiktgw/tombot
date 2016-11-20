@@ -1,24 +1,23 @@
-# README
+# Tombot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tombot is line bot for tombo house, the share house I live in now. This is implemented by Ruby on Rails and deployed by Heroku with Scheduler and Fixie.
 
-Things you may want to cover:
+**Command examples**
 
-* Ruby version
+    tmb_ping                              #=> return pong, mainly for runnig check
+    tmb_set-cleaning-date_2016/1/1        #=> set cleaning date for the house
+    tmb_get-cleaning-date                 #=> return current scheduled cleaning date
+    tmb_set-daijin                        #=> set person in charge for throwing away garbage mannually
+    tmb_hat                               #=> return random person  
+    tmb_help                              #=> return all commands
+    
 
-* System dependencies
+**Reminders**
 
-* Configuration
+* Cleaning date reminder
+* Paying rent reminder
+* Garbage reminder
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
