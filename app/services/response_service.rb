@@ -49,30 +49,25 @@ class ResponseService
     end
   end
 
-  private
   def get_cleaning_date
     date = @cleaning_date.scheduled_cleaning_date
     "現在掃除は#{date}に設定されています"
   end
 
-  private
   def set_daijin
     @garbage.set_person_in_charge_manually(@data)
   end
 
-  private
   def get_daijin
     person_in_charge = @garbage.get_person_in_charge
     "今週のゴミ出し大臣は#{person_in_charge}さんです."
   end
 
-  private
   def hat
     person = Constants::MEMBER_LIST.sample
     "#{person}さん,Youいっちゃいなyo!"
   end
 
-  private
   def help
     arr = COMMANDS.values.unshift('選択可能なコマンドは以下のとおりです')
     arr.join("\n")
