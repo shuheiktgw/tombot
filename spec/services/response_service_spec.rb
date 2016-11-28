@@ -69,6 +69,16 @@ class ResponseServiceSpec
         response_service.form_response
       end
 
+      it 'should call account to get-account' do
+        @params["events"][0]["message"]["text"] = 'tmb_get-account'
+        response_service = ResponseService.new(params = @params, cleaning_date = @cleaning_date_mock, garbage = @garbage_mock)
+
+        expect = '家賃の振り込み口座は以下です'
+        actual = response_service.form_response
+
+        expect(actual[0]).to start_with(expect)
+      end
+
       it 'should return random person to hat' do
         @params["events"][0]["message"]["text"] = 'tmb_hat'
         response_service = ResponseService.new(params = @params)

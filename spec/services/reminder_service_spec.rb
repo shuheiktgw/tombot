@@ -1,11 +1,11 @@
 require_relative '../../app/services/reminder_service'
 
 class ReminderServiceSpec
-  describe('ResponseService') do
+  describe('ReminderService') do
     describe('#check_payment_reminder') do
       it('should return Oneshasu reminder if today is 25th') do
         reminder_service = ReminderService.new(Date::new(2016, 11, 25))
-        expected = '今日は25日です. 家賃の振り込みをおねシャッス!'
+        expected = "今日は25日です. 家賃の振り込みをおねシャッス!口座は以下です\n"
         actual = reminder_service.check_payment_reminder
 
         expect(actual).to eq(expected)

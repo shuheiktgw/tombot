@@ -1,14 +1,10 @@
 require_relative '../../config/initializers/constants'
 
 class ResponseService
-  PREFIX_KEY = 'tmb'
-  EVENT_TYPE_MESSAGE = 'message'
-  COMMANDS = {PING: 'ping', SET_CLEANING_DATE: 'set-cleaning-date', GET_CLEANING_DATE: 'get-cleaning-date', SET_DAIJIN: 'set-daijin',GET_DAIJIN: 'get-daijin', HAT: 'hat' , HELP: 'help'}
-
   def initialize(params, cleaning_date = CleaningDateService.new, garbage = GarbageService.new)
     event = params["events"][0]
     event_type = event["type"]
-    input_text = (event["message"]["text"] if event_type == EVENT_TYPE_MESSAGE) || ''
+    input_text = (event["message"]["text"] if event_type == Constants::EVENT_TYPE_MESSAGE) || ''
     @reply_token = event["replyToken"]
     @prefix, @command, @data = input_text.split('_')
     @cleaning_date = cleaning_date
@@ -16,22 +12,24 @@ class ResponseService
   end
 
   def form_response
-    return '' unless @prefix == PREFIX_KEY
+    return '' unless @prefix == Constants::PREFIX_KEY
 
     case @command
-      when COMMANDS[:PING]
+      when Constants::COMMANDS[:PING]
         ['pong', @reply_token]
-      when COMMANDS[:SET_CLEANING_DATE]
+      when Constants::COMMANDS[:SET_CLEANING_DATE]
         [set_cleaning_date, @reply_token]
-      when COMMANDS[:GET_CLEANING_DATE]
+      when Constants::COMMANDS[:GET_CLEANING_DATE]
         [get_cleaning_date, @reply_token]
-      when COMMANDS[:SET_DAIJIN]
+      when Constants::COMMANDS[:SET_DAIJIN]
         [set_daijin, @reply_token]
-      when COMMANDS[:GET_DAIJIN]
+      when Constants::COMMANDS[:GET_DAIJIN]
         [get_daijin, @reply_token]
-      when COMMANDS[:HAT]
+      when Constants::COMMANDS[:GET_ACCOUNT]
+        [get_account, @reply_token]
+      when Constants::COMMANDS[:HAT]
         [hat, @reply_token]
-      when COMMANDS[:HELP]
+      when Constants::COMMANDS[:HELP]
         [help, @reply_token]
       else
         ['コマンドが認識できませんでした. tmb_helpでコマンドの一覧を確認することができます.', @reply_token]
@@ -63,13 +61,17 @@ class ResponseService
     "今週のゴミ出し大臣は#{person_in_charge}さんです."
   end
 
+  def get_account
+    "家賃の振り込み口座は以下です.\n#{Constants::ACCOUNT}"
+  end
+
   def hat
     person = Constants::MEMBER_LIST.sample
     "#{person}さん,Youいっちゃいなyo!"
   end
 
   def help
-    arr = COMMANDS.values.unshift('選択可能なコマンドは以下のとおりです')
+    arr = Constants::COMMANDS.values.unshift('選択可能なコマンドは以下のとおりです')
     arr.join("\n")
   end
 end
