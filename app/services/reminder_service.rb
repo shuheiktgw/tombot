@@ -1,6 +1,8 @@
 require 'date'
 
 class ReminderService
+  ACCOUNT = ENV['ACCOUNT']
+
   def initialize(today = Date::today, garbage_service = GarbageService.new, cleaning_date_service = CleaningDateService.new)
     @today = today
     @garbage_service = garbage_service
@@ -31,7 +33,7 @@ class ReminderService
 
   def check_payment_reminder
     if @today.day == 25
-      '今日は25日です. 家賃の振り込みをおねシャッス!'
+      "今日は25日です. 家賃の振り込みをおねシャッス!口座は以下です\n#{ACCOUNT}"
     elsif @today.day == 28
       '今日は28日です. まさかまだ家賃振り込んでない人なんていないよね...'
     else
