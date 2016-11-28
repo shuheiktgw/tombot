@@ -10,6 +10,37 @@ class GarbageServiceSpec
     end
 
     describe ('#reminder') do
+      it('should return Hunengomi if today is second Monday') do
+        expect = '今日は不燃ゴミの日'
+        reminder_service = ReminderService.new(Date::new(2016, 11, 14))
+        actual = reminder_service.check_garbage_reminder
+
+        expect(actual).to start_with(expect)
+      end
+
+
+      it('should return Hunengomi if today is fourth Monday') do
+        expect = '今日は不燃ゴミの日'
+        reminder_service = ReminderService.new(Date::new(2016, 11, 28))
+        actual = reminder_service.check_garbage_reminder
+
+        expect(actual).to start_with(expect)
+      end
+
+      it('should return nothing if today is first Monday') do
+        reminder_service = ReminderService.new(Date::new(2016, 11, 7))
+        actual = reminder_service.check_garbage_reminder
+
+        expect(actual).to be_nil
+      end
+
+      it('should return nothing if today is third Monday') do
+        reminder_service = ReminderService.new(Date::new(2016, 11, 21))
+        actual = reminder_service.check_garbage_reminder
+
+        expect(actual).to be_nil
+      end
+
       it('should return Moerugomi reminder if today is Tuesday') do
         expected = '今日は燃えるゴミの日'
         actual = @garbage_instance.reminder(Date::new(2016, 11, 8))
@@ -32,20 +63,6 @@ class GarbageServiceSpec
       end
 
       it('should return new Daijin reminder if today is Sunday') do
-        expected = '明日からのゴミ出し大臣は'
-        actual = @garbage_instance.reminder(Date::new(2016, 11, 13))
-
-        expect(actual).to start_with(expected)
-      end
-
-      it('should be empty if today is Monday') do
-        reminder_service = ReminderService.new(Date::new(2016, 11, 7))
-        actual = reminder_service.check_garbage_reminder
-
-        expect(actual).to be_empty
-      end
-
-      it('should return new Daijin name if today is Sunday') do
         expected = '明日からのゴミ出し大臣は'
         actual = @garbage_instance.reminder(Date::new(2016, 11, 13))
 

@@ -9,12 +9,17 @@ class GarbageService
 
   def reminder(today)
     # 0 = 日曜日, 6 = 土曜日
-    day_of_week = today.wday
+    day_of_week   = today.wday
+    week_of_month = get_week_of_month(today)
 
     case day_of_week
       when 0
         set_person_in_charge
         "明日からのゴミ出し大臣は#{get_person_in_charge}さんです! よろしくお願いします!"
+      when 1
+        if week_of_month == 2 || week_of_month == 4
+          "今日は不燃ゴミの日です. ゴミ出し大臣の#{get_person_in_charge}さんは不燃ゴミをお願いします!"
+        end
       when 2, 5
         "今日は燃えるゴミの日です. ゴミ出し大臣の#{get_person_in_charge}さんは燃えるゴミをお願いします!"
       when 6
@@ -48,5 +53,9 @@ class GarbageService
       next_index = list.index(previous) + 1
       @garbage_model.create(name: list[next_index])
     end
+  end
+
+  def get_week_of_month(today)
+    (today.day + 6) / 7
   end
 end
