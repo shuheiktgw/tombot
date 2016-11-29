@@ -6,6 +6,7 @@ class ResponseService
     event_type = event["type"]
     input_text = (event["message"]["text"] if event_type == Constants::EVENT_TYPE_MESSAGE) || ''
     @reply_token = event["replyToken"]
+    @source_id = (event["source"]["userId"] || event["source"]["groupId"]) if ENV['RAILS_ENV'] == 'production'
     @prefix, @command, @data = input_text.split('_')
     @cleaning_date = cleaning_date
     @garbage = garbage
@@ -13,6 +14,7 @@ class ResponseService
 
   def form_response
     return '' unless @prefix == Constants::PREFIX_KEY
+    return '' unless eligible_source?
 
     case @command
       when Constants::COMMANDS[:PING]
@@ -73,5 +75,13 @@ class ResponseService
   def help
     arr = Constants::COMMANDS.values.unshift('選択可能なコマンドは以下のとおりです')
     arr.join("\n")
+  end
+
+  def eligible_source?
+    if ENV['RAILS_ENV'] == 'production'
+      Constants::ELIGIBLE_SOURCE.include?(@source_id)
+    else
+      true
+    end
   end
 end

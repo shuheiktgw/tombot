@@ -30,22 +30,18 @@ class WebhookController < ApplicationController
     line_client.reply(reply_token, response_text)  if response_text.present?
   end
 
-  private
   def get_reminders
     reminder_service.execute
   end
 
-  private
   def response_service(input_text)
     ResponseService.new(input_text)
   end
 
-  private
   def reminder_service
     ReminderService.new
   end
 
-  private
   def line_client
     @line_client ||= LineClient.new
   end

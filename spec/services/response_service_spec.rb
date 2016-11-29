@@ -4,7 +4,7 @@ class ResponseServiceSpec
   describe 'ResponseService' do
     describe '#form_response' do
       before do
-        @params = {"events" => [{"type" => 'message', "message" => {"text" => ''}}]}
+        @params = {"events" => [{"type" => 'message', "source" => {"userId" => "1235"},"message" => {"text" => ''}}]}
         @cleaning_date_mock = double('Cleaning date service mock')
         @garbage_mock = double('Garbage service mock')
       end
