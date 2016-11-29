@@ -79,6 +79,8 @@ class ResponseService
 
   def eligible_source?
     if ENV['RAILS_ENV'] == 'production'
+      logger.info(Constants::ELIGIBLE_SOURCE)
+      logger.info(@source_id)
       Constants::ELIGIBLE_SOURCE.include?(@source_id)
     else
       true
