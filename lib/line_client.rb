@@ -1,12 +1,10 @@
 class LineClient
   END_POINT = "https://api.line.me"
-  OUTBOUND_PROXY = ENV['OUTBOUND_PROXY']
   CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
   PUSH_TO_ID = ENV['PUSH_TO_ID']
 
   def initialize
     @channel_access_token = CHANNEL_ACCESS_TOKEN
-    @proxy = OUTBOUND_PROXY
   end
 
   def post(path, data)
@@ -14,7 +12,6 @@ class LineClient
       conn.request :json
       conn.response :json, :content_type => /\bjson$/
       conn.adapter Faraday.default_adapter
-      conn.proxy @proxy
     end
 
     res = client.post do |request|
@@ -43,7 +40,7 @@ class LineClient
     messages = form_text_messages(text)
 
     body = {
-        "to" => PUSH_TO_ID, # TODO: toをtomboのグループに変更する
+        "to" => PUSH_TO_ID,
         "messages" => messages
     }
 
