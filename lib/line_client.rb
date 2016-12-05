@@ -14,7 +14,7 @@ class LineClient
       conn.adapter Faraday.default_adapter
     end
 
-    res = client.post do |request|
+    client.post do |request|
       request.url path
       request.headers = {
           'Content-type' => 'application/json',
@@ -22,7 +22,6 @@ class LineClient
       }
       request.body = data
     end
-    res
   end
 
   def reply(reply_token, text)
@@ -33,7 +32,7 @@ class LineClient
         "messages" => messages
     }
 
-    res = post('/v2/bot/message/reply', body.to_json)
+    post('/v2/bot/message/reply', body.to_json)
   end
 
   def push(text)

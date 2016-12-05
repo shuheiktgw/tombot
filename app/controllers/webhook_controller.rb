@@ -8,7 +8,7 @@ class WebhookController < ApplicationController
 
     res = reply(params)
 
-    logger.info(res)
+    logger.info(res.body)
     render :nothing => true, status: :ok
   end
 
@@ -18,7 +18,7 @@ class WebhookController < ApplicationController
 
     reminders.each do |reminder|
       res = line_client.push(reminder)
-      logger.info(res)
+      logger.info(res.body)
     end
   end
 
