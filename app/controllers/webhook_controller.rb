@@ -8,7 +8,7 @@ class WebhookController < ApplicationController
 
     res = reply(params)
 
-    logger.info(res.body)
+    logger.info(res.body) if res.present?
     render :nothing => true, status: :ok
   end
 
