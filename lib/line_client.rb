@@ -1,3 +1,5 @@
+require 'line-bot-api'
+
 class LineClient
   CHANNEL_SECRET = ENV['CHANNEL_SECRET']
   CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
