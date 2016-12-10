@@ -1,68 +1,31 @@
 class LineClient
-  END_POINT = "https://api.line.me"
+  CHANNEL_SECRET = ENV['CHANNEL_SECRET']
   CHANNEL_ACCESS_TOKEN = ENV['CHANNEL_ACCESS_TOKEN']
   PUSH_TO_ID = ENV['PUSH_TO_ID']
 
+  attr_reader :client
+
   def initialize
-    @channel_access_token = CHANNEL_ACCESS_TOKEN
-  end
-
-  def post(path, data)
-    client = Faraday.new(:url => END_POINT) do |conn|
-      conn.request :json
-      conn.response :json, :content_type => /\bjson$/
-      conn.adapter Faraday.default_adapter
-    end
-
-    client.post do |request|
-      request.url path
-      request.headers = {
-          'Content-type' => 'application/json',
-          'Authorization' => "Bearer #{@channel_access_token}"
-      }
-      request.body = data
-    end
+    @client ||= Line::Bot::Client.new { |config|
+      config.channel_secret = CHANNEL_SECRET
+      config.channel_token = CHANNEL_ACCESS_TOKEN
+    }
   end
 
   def reply(reply_token, text)
-    messages = form_text_messages(text)
-
-    body = {
-        "replyToken" => reply_token,
-        "messages" => messages
-    }
-
-    post('/v2/bot/message/reply', body.to_json)
+    client.reply_message(reply_token, text)
   end
 
-  def push(text)
-    messages = form_text_messages(text)
-
-    body = {
-        "to" => PUSH_TO_ID,
-        "messages" => messages
-    }
-
-    post('/v2/bot/message/push', body.to_json)
+  def push(message)
+    client.push_message(PUSH_TO_ID, text_message(message))
   end
 
   private
-  def form_text_messages(*texts)
-    messages = []
 
-    texts.each do |text|
-      messages << text_message(text)
-    end
-
-    messages
-  end
-
-  private
   def text_message(text)
     {
         "type" => "text",
         "text" => text
     }
   end
-
 end

@@ -30,8 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 
 gem 'dotenv-rails'
-gem 'faraday'
-gem 'faraday_middleware'
+gem 'line-bot-api'
 
 group :production do
   gem 'rails_12factor'
