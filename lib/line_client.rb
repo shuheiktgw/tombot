@@ -1,4 +1,4 @@
-require 'line/bot/client'
+require 'line'
 
 class LineClient
   CHANNEL_SECRET = ENV['CHANNEL_SECRET']
